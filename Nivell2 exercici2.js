@@ -24,30 +24,44 @@ let salaries = [{
     salary: 2000
 }];
 
-const getEmpleado = id => {
+var foundemployee = "";
+var dolares = "";
+var encontrado = ""
+
+let getEmpleado = id => {
     return new Promise((resolve, reject) =>{
-        if(employees.find(usuario => usuario.id === id)){
-            resolve('Empleado encontrado');
+        var foundemployee = employees.filter(employees => employees.id === id);
+        encontrado = foundemployee[0];
+        if (typeof encontrado !== 'undefined'){
+            return resolve(encontrado);
         }else{
             reject('Empleado no existe');
         }
     });
 }; 
-
-const getSalario = id => {
+let getSalario = encontrado => { 
     return new Promise((resolve, reject) =>{
-        if(employees.find(usuario => usuario.id === id)){
-            resolve(`El salario del empleado ${id} es ${(salaries[id-1].salary)};`);
+        if (typeof encontrado === 'undefined'){
+            reject('Salario no disponible');
         }else{
-            reject('Empleado no existe');
-        }
+            var dolares = salaries.filter(salaries => salaries.id === encontrado.id);
+            resolve(dolares[0].salary);
+        }        
     });
-}; 
+};
 
-getSalario(3)
+getEmpleado(1)
+.then(encontrado =>{
+    console.log(encontrado);
+})
+.catch(err =>{
+    console.error(err);
+});
+
+getSalario(encontrado)
 .then(res =>{
     console.log(res);
 })
 .catch(err =>{
-    console.error(err);
+    console.error(err)
 });

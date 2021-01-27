@@ -1,6 +1,6 @@
 /*
-- Exercici 3
-Invoqui la primera Promise getEmpleado i posteriorment getSalario, niant l'execució de les dues promises.
+- Exercici 2
+Creu una altra arrow function getSalario que rebi com a paràmetre un objecte employee i retorni el seu salari.
 */
 let employees = [{
     id: 1,
@@ -24,38 +24,38 @@ let salaries = [{
     salary: 2000
 }];
 
-const getEmpleado = id => {
+var foundemployee = "";
+var dolares = "";
+var encontrado = ""
+
+let getEmpleado = id => {
     return new Promise((resolve, reject) =>{
-        if(employees.find(usuario => usuario.id === id)){
-            resolve('Empleado encontrado');
+        var foundemployee = employees.filter(employees => employees.id === id);
+        encontrado = foundemployee[0];
+        if (typeof encontrado !== 'undefined'){
+            return resolve(encontrado);
         }else{
             reject('Empleado no existe');
         }
     });
 }; 
-
-const getSalario = id => {
+let getSalario = encontrado => { 
     return new Promise((resolve, reject) =>{
-        if(employees.find(usuario => usuario.id === id)){
-            resolve(`El salario del empleado ${id} es ${(salaries[id-1].salary)};`);
+        if (typeof encontrado === 'undefined'){
+            reject('Salario no disponible');
         }else{
-            reject('Salario no disponible porque este Empleado no existe');
-        }
+            var dolares = salaries.filter(salaries => salaries.id === encontrado.id);
+            resolve(dolares[0].salary);
+        }        
     });
-}; 
+};
 
-getEmpleado(1)
-.then(res =>{
-    console.log('Genial! '+ res);
+getEmpleado(3)
+.then(encontrado => getSalario(encontrado))
+.then(resultadoFinal => {
+  console.log(encontrado);
+  console.log(resultadoFinal)
 })
 .catch(err =>{
-    console.error(err);
-});
-
-getSalario(3)
-.then(res =>{
-    console.log(res);
-})
-.catch(err =>{
-    console.error(err);
+    console.error(err)
 });

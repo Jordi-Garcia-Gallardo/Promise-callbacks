@@ -25,19 +25,23 @@ let salaries = [{
     salary: 2000
 }];
 
-const getEmpleado = id => {
+var foundemployee = "";
+var encontrado = ""
+
+let getEmpleado = id => {
     return new Promise((resolve, reject) =>{
-        if(employees.find(usuario => usuario.id === id)){
-            resolve('Empleado encontrado');
+        var foundemployee = employees.filter(employees => employees.id === id);
+        encontrado = foundemployee[0];
+        if (typeof encontrado !== 'undefined'){
+            return resolve(encontrado);
         }else{
             reject('Empleado no existe');
         }
     });
-}; 
-
-getEmpleado(1)
+};
+getEmpleado(2)
 .then(res =>{
-    console.log('Genial! '+ res);
+    console.log(res);
 })
 .catch(err =>{
     console.error(err);
