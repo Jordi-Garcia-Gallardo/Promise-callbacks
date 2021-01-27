@@ -1,6 +1,6 @@
 /*
-- Exercici 2
-Creu una altra arrow function getSalario que rebi com a paràmetre un objecte employee i retorni el seu salari.
+- Exercici 3
+Invoqui la primera Promise getEmpleado i posteriorment getSalario, niant l'execució de les dues promises.
 */
 let employees = [{
     id: 1,
@@ -57,5 +57,5 @@ getEmpleado(3)
   console.log(resultadoFinal)
 })
 .catch(err =>{
-    console.error(err)
+  console.error(err)
 });
